@@ -37,7 +37,6 @@ public class Card implements Serializable {
     @Column(name = "mana", length = 2)
     private Long mana;
 
-
     private enum type {
         Spell,
         Minions,
