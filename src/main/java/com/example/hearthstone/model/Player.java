@@ -1,7 +1,7 @@
 package com.example.hearthstone.model;
 
+import com.example.hearthstone.enums.EnumPlayerClass;
 import jakarta.persistence.*;
-import org.hibernate.sql.results.graph.Initializer;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -17,13 +17,27 @@ public class Player implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "life")
     private Long life;
 
+    @Column(name = "mana")
     private Long mana;
 
-    private enum PlayerClass{
+    @Column(name = "playerClass")
+    private EnumPlayerClass playerClass;
+
+    public EnumPlayerClass getPlayerClass() {
+        return playerClass;
+    }
+
+    public void setPlayerClass(EnumPlayerClass playerClass) {
+        this.playerClass = playerClass;
+    }
+
+    private enum PlayerClass {
         Mage,
         Hunter,
         Warrior,

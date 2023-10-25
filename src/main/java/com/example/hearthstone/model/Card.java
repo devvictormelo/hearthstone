@@ -1,6 +1,8 @@
 package com.example.hearthstone.model;
 
 
+import com.example.hearthstone.enums.EnumLatterClass;
+import com.example.hearthstone.enums.EnumTypeLetter;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -19,13 +21,13 @@ public class Card implements Serializable {
     private Long id;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    List<Cheap> cheaps;
+    List<Cheap> cheap;
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "description" )
-    private Long description;
+    private String description;
 
     @Column(name = "attack", length = 2)
     private Long attack;
@@ -37,23 +39,33 @@ public class Card implements Serializable {
     @Column(name = "mana", length = 2)
     private Long mana;
 
-    private enum type {
-        Spell,
-        Minions,
-        Weapons
+    @Column(name = "latterCLass")
+    @Enumerated(EnumType.STRING)
+    private EnumLatterClass latterClass;
 
+    @Column(name = "typeLetter")
+    @Enumerated(EnumType.STRING)
+    private EnumTypeLetter typeLetter;
+
+    public EnumLatterClass getLatterClass() {
+        return latterClass;
     }
 
-    private enum letterClass {
-        Mage,
-        Hunter,
-        Warrior,
-        Druid
+    public void setLatterClass(EnumLatterClass latterClass) {
+        this.latterClass = latterClass;
     }
 
-    public Card(Long id, List<Cheap> cheaps, String name, Long description, Long attack, Long defense, Long mana) {
+    public EnumTypeLetter getTypeLetter() {
+        return typeLetter;
+    }
+
+    public void setTypeLetter(EnumTypeLetter typeLetter) {
+        this.typeLetter = typeLetter;
+    }
+
+    public Card(Long id, List<Cheap> cheap, String name, String description, Long attack, Long defense, Long mana) {
         this.id = id;
-        this.cheaps = cheaps;
+        this.cheap = cheap;
         this.name = name;
         this.description = description;
         this.attack = attack;
@@ -69,12 +81,12 @@ public class Card implements Serializable {
         this.id = id;
     }
 
-    public List<Cheap> getCheaps() {
-        return cheaps;
+    public List<Cheap> getCheap() {
+        return cheap;
     }
 
-    public void setCheaps(List<Cheap> cheaps) {
-        this.cheaps = cheaps;
+    public void setCheap(List<Cheap> cheap) {
+        this.cheap = cheap;
     }
 
     public String getName() {
@@ -85,11 +97,11 @@ public class Card implements Serializable {
         this.name = name;
     }
 
-    public Long getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Long description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
