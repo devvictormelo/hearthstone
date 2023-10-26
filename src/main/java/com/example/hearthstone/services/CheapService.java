@@ -2,7 +2,9 @@ package com.example.hearthstone.services;
 
 import com.example.hearthstone.exceptions.ResourceNotFoundException;
 import com.example.hearthstone.model.Card;
+import com.example.hearthstone.model.Cheap;
 import com.example.hearthstone.repositories.CardRepository;
+import com.example.hearthstone.repositories.CheapRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,49 +12,45 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Repository
-public class CardService {
+public class CheapService {
 
-    private Logger logger = Logger.getLogger(Card.class.getName());
+    private Logger logger = Logger.getLogger(Cheap.class.getName());
 
     @Autowired
-    CardRepository repository;
+    CheapRepository repository;
 
-    public List<Card> findAll() {
+    public List<Cheap> findAll() {
 
         logger.info("Fiding all people!");
 
         return repository.findAll();
     }
 
-    public Card findById(Long id) {
+    public Cheap findById(Long id) {
 
         logger.info("Fiding one person!");
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
-    public Card create(Card person) {
+    public Cheap create(Cheap cheap) {
 
         logger.info("Creating one person!");
 
-        return repository.save(person);
+        Cheap savedCheap = repository.save(cheap);
+        return this.findById(savedCheap.getId());
     }
 
-    public Card update(Card card) {
+    public Cheap update(Cheap cheap) {
 
 
         logger.info("Updating one person!");
 
-        var entity = repository.findById(card.getId())
+        var entity = repository.findById(cheap.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 
-        card.setName(card.getName());
-        card.setAttack(card.getAttack());
-        card.setDefense(card.getDefense());
-        card.setMana(card.getMana());
-        card.setDescription(card.getDescription());
 
-        return repository.save(card);
+        return repository.save(cheap);
     }
 
     public void delete(Long id) {

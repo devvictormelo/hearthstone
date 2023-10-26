@@ -6,6 +6,7 @@ import org.hibernate.annotations.ManyToAny;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "cheap")
@@ -18,7 +19,11 @@ public class Cheap implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToAny(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "card_cheap",
+            joinColumns = @JoinColumn(name = "cheap_id"),
+            inverseJoinColumns = @JoinColumn(name = "card_id"))
     List<Card> cards;
 
     public Cheap(Long id, List<Card> cards) {

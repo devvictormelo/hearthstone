@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "card")
@@ -20,8 +21,11 @@ public class Card implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    List<Cheap> cheap;
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    List<Cheap> cheap;
+//
+//    @ManyToMany(mappedBy = "cardsInCheap")
+//    Set<Cheap> cards;
 
     @Column(name = "name")
     private String name;
@@ -39,13 +43,13 @@ public class Card implements Serializable {
     @Column(name = "mana", length = 2)
     private Long mana;
 
-    @Column(name = "latterCLass")
-    @Enumerated(EnumType.STRING)
-    private EnumLatterClass latterClass;
-
     @Column(name = "typeLetter")
     @Enumerated(EnumType.STRING)
     private EnumTypeLetter typeLetter;
+
+    @Column(name = "latterClass")
+    @Enumerated(EnumType.STRING)
+    private EnumLatterClass latterClass;
 
     public EnumLatterClass getLatterClass() {
         return latterClass;
@@ -55,38 +59,12 @@ public class Card implements Serializable {
         this.latterClass = latterClass;
     }
 
-    public EnumTypeLetter getTypeLetter() {
-        return typeLetter;
-    }
-
-    public void setTypeLetter(EnumTypeLetter typeLetter) {
-        this.typeLetter = typeLetter;
-    }
-
-    public Card(Long id, List<Cheap> cheap, String name, String description, Long attack, Long defense, Long mana) {
-        this.id = id;
-        this.cheap = cheap;
-        this.name = name;
-        this.description = description;
-        this.attack = attack;
-        this.defense = defense;
-        this.mana = mana;
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public List<Cheap> getCheap() {
-        return cheap;
-    }
-
-    public void setCheap(List<Cheap> cheap) {
-        this.cheap = cheap;
     }
 
     public String getName() {
@@ -127,5 +105,13 @@ public class Card implements Serializable {
 
     public void setMana(Long mana) {
         this.mana = mana;
+    }
+
+    public EnumTypeLetter getTypeLetter() {
+        return typeLetter;
+    }
+
+    public void setTypeLetter(EnumTypeLetter typeLetter) {
+        this.typeLetter = typeLetter;
     }
 }
