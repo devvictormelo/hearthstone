@@ -37,8 +37,7 @@ public class CheapService {
 
         logger.info("Creating one person!");
 
-        Cheap savedCheap = repository.save(cheap);
-        return this.findById(savedCheap.getId());
+        return repository.save(cheap);
     }
 
     public Cheap update(Cheap cheap) {

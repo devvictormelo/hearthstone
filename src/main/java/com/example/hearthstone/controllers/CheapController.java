@@ -21,15 +21,19 @@ public class CheapController {
     @Autowired
     private CardService cardService;
 
-
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Card> findAll() {
-        return cardService.findAll();
+    public List<Cheap> findAll() {
+        return service.findAll();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Cheap findById(@PathVariable(value = "id") Long id) throws Exception {
         return service.findById(id);
+    }
+
+    @GetMapping(value = "card/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Card detailIdDeckingCard(@PathVariable(value = "id") Long id) throws Exception {
+        return cardService.findById(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

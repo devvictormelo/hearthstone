@@ -1,6 +1,7 @@
 package com.example.hearthstone.controllers;
 
 import com.example.hearthstone.model.Card;
+import com.example.hearthstone.model.Cheap;
 import com.example.hearthstone.services.CardService;
 import com.example.hearthstone.util.CardValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,11 @@ public class CardController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Card> findAll() {
         return service.findAll();
+    }
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Card findById(@PathVariable(value = "id") Long id) throws Exception {
+        return service.findById(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

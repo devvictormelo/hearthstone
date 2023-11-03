@@ -21,12 +21,6 @@ public class Card implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    List<Cheap> cheap;
-//
-//    @ManyToMany(mappedBy = "cardsInCheap")
-//    Set<Cheap> cards;
-
     @Column(name = "name")
     private String name;
 
