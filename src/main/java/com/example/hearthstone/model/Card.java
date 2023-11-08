@@ -1,14 +1,11 @@
 package com.example.hearthstone.model;
 
-
-import com.example.hearthstone.enums.EnumLatterClass;
+import com.example.hearthstone.enums.EnumClassType;
 import com.example.hearthstone.enums.EnumTypeLetter;
 import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "card")
@@ -24,7 +21,7 @@ public class Card implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description" )
+    @Column(name = "description")
     private String description;
 
     @Column(name = "attack", length = 2)
@@ -41,16 +38,24 @@ public class Card implements Serializable {
     @Enumerated(EnumType.STRING)
     private EnumTypeLetter typeLetter;
 
-    @Column(name = "latterClass")
+    @Column(name = "classType")
     @Enumerated(EnumType.STRING)
-    private EnumLatterClass latterClass;
+    private EnumClassType classType;
 
-    public EnumLatterClass getLatterClass() {
-        return latterClass;
+    public EnumTypeLetter getTypeLetter() {
+        return typeLetter;
     }
 
-    public void setLatterClass(EnumLatterClass latterClass) {
-        this.latterClass = latterClass;
+    public void setTypeLetter(EnumTypeLetter typeLetter) {
+        this.typeLetter = typeLetter;
+    }
+
+    public EnumClassType getClassType() {
+        return classType;
+    }
+
+    public void setClassType(EnumClassType classType) {
+        this.classType = classType;
     }
 
     public Long getId() {
@@ -101,11 +106,4 @@ public class Card implements Serializable {
         this.mana = mana;
     }
 
-    public EnumTypeLetter getTypeLetter() {
-        return typeLetter;
-    }
-
-    public void setTypeLetter(EnumTypeLetter typeLetter) {
-        this.typeLetter = typeLetter;
-    }
 }

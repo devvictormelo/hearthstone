@@ -31,11 +31,18 @@ public class CardService {
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
-    public Card create(Card person) {
+    public void create(Card person) {
 
         logger.info("Creating one person!");
 
-        return repository.save(person);
+        repository.save(person);
+    }
+
+    public void saveAll(List<Card> persons) {
+
+        logger.info("Creating many person!");
+
+        repository.saveAll(persons);
     }
 
     public Card update(Card card) {
@@ -51,6 +58,8 @@ public class CardService {
         card.setDefense(card.getDefense());
         card.setMana(card.getMana());
         card.setDescription(card.getDescription());
+        card.setClassType(card.getClassType());
+        card.setTypeLetter(card.getTypeLetter());
 
         return repository.save(card);
     }

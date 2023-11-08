@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -29,11 +30,18 @@ public class CardController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> create (@RequestBody Card card) {
+    public ResponseEntity<?> create(@RequestBody Card card) {
         CardValidator.validate(card);
         service.create(card);
         return ResponseEntity.ok(card);
     }
+
+    @PostMapping(value = "list", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Card>> createAll(@RequestBody List<Card> card) {
+        service.saveAll(card);
+        return ResponseEntity.ok().body(card);
+    }
+
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Card update(@RequestBody Card card) {

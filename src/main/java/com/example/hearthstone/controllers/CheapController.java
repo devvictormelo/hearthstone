@@ -1,8 +1,6 @@
 package com.example.hearthstone.controllers;
 
-import com.example.hearthstone.model.Card;
 import com.example.hearthstone.model.Cheap;
-import com.example.hearthstone.services.CardService;
 import com.example.hearthstone.services.CheapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,12 +16,9 @@ public class CheapController {
     @Autowired
     private CheapService service;
 
-    @Autowired
-    private CardService cardService;
-
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Cheap> findAll() {
-        return service.findAll();
+    @GetMapping(value = "detailed",produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Cheap> findAllDetailed() {
+        return service.findAllDetailed();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -31,14 +26,10 @@ public class CheapController {
         return service.findById(id);
     }
 
-    @GetMapping(value = "card/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Card detailIdDeckingCard(@PathVariable(value = "id") Long id) throws Exception {
-        return cardService.findById(id);
-    }
-
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Cheap create(@RequestBody Cheap cheap) {
-        return service.create(cheap);
+    public ResponseEntity<?> create(@RequestBody Cheap cheap) {
+        service.create(cheap);
+        return ResponseEntity.ok(cheap);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

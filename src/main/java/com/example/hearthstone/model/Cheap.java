@@ -26,11 +26,6 @@ public class Cheap implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "card_id"))
     List<Card> cards;
 
-    public Cheap(Long id, List<Card> cards) {
-        this.id = id;
-        this.cards = cards;
-    }
-
     public Long getId() {
         return id;
     }

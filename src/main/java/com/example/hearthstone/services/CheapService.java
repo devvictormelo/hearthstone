@@ -1,9 +1,7 @@
 package com.example.hearthstone.services;
 
 import com.example.hearthstone.exceptions.ResourceNotFoundException;
-import com.example.hearthstone.model.Card;
 import com.example.hearthstone.model.Cheap;
-import com.example.hearthstone.repositories.CardRepository;
 import com.example.hearthstone.repositories.CheapRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,7 +17,7 @@ public class CheapService {
     @Autowired
     CheapRepository repository;
 
-    public List<Cheap> findAll() {
+    public List<Cheap> findAllDetailed() {
 
         logger.info("Fiding all people!");
 
